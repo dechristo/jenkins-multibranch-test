@@ -4,20 +4,20 @@ pipeline {
     stage('Unit Test') {
       when { tag "test-*" }
       steps {
-        sh 'mvn test'
+        sh 'echo "[test] Running Unit tests..."'
       }
     }
 
     stage('Integration Test') {
       when { tag "production-*" }
       steps {
-        sh 'mvn test-integration'
+        sh 'echo "[prod] running integration test"'
       }
     }
 
     stage('Build') {
       steps {
-        sh 'mvn clean install'
+        sh 'echo "[all] clean building..."'
       }
     }
 
