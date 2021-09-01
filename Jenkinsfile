@@ -1,6 +1,13 @@
 pipeline {
   agent any
   stages {
+ 
+    stage("Prepare") {
+       steps {
+          sh 'git fetch --all --tags'
+       }
+    }
+
     stage('Unit Test') {
       when { tag "test-*" }
       steps {
