@@ -1,5 +1,11 @@
 pipeline {
   agent any
+  
+  parameters {
+        gitParameter name: 'TAG', 
+                     type: 'PT_TAG',
+                     defaultValue: 'master'
+  }
 
   options { skipDefaultCheckout() } 
 
@@ -21,7 +27,7 @@ pipeline {
           checkout scm: [
             $class: 'GitSCM',
             userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']],
-            branches: [[name: 'refs/tags/${TAG}']]],
+            branches: [[name: "${params.TAG}"]], 
             poll: false
       }
 
