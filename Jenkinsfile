@@ -20,8 +20,9 @@ pipeline {
        steps {
           checkout scm: [
             $class: 'GitSCM',
+            userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']],
             branches: [[name: 'refs/tags/${TAG}']]],
-             poll: false
+            poll: false
       }
 
     }
