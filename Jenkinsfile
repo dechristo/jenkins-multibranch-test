@@ -13,6 +13,7 @@ pipeline {
             refspec: '+refs/tags/*’:’refs/remotes/origin/tags/*',
             poll: false
         ]
+        sh 'git tag'
       }
     }
 
