@@ -15,7 +15,8 @@ pipeline {
           checkout scm: [
             $class: 'GitSCM',
             userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']],
-            branches: [[name: "${params.TAG}"]], 
+            branches: [[name: "**/tags/**"]], 
+            refspec: '+refs/tags/*’:’refs/remotes/origin/tags/*'
             poll: false
         ]
       }
