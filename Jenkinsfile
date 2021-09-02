@@ -1,30 +1,30 @@
 pipeline {
   agent any
 
-  parameters {
-    gitParameter 
-      name: 'TAG', 
-      type: 'PT_TAG',
-      defaultValue: 'master'
-  }
-
-  options { 
-    skipDefaultCheckout true
-  } 
+  options { skipDefaultCheckout() } 
 
   stages {
     stage("Prepare") {
+      //  steps {
+      //     checkout scm:[
+      //       $class: 'GitSCM', 
+      //       branches: [[name: "${params.TAG}"]], 
+      //       doGenerateSubmoduleConfigurations: false, 
+      //       extensions: [], 
+      //       gitTool: 'Default', 
+      //       submoduleCfg: [], 
+      //       userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']]
+      //     ]
+      //  }
+
        steps {
-          checkout scm:[
-            $class: 'GitSCM', 
-            branches: [[name: "${params.TAG}"]], 
-            doGenerateSubmoduleConfigurations: false, 
-            extensions: [], 
-            gitTool: 'Default', 
-            submoduleCfg: [], 
-            userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']]
-          ]
-       }
+          checkout scm: [
+            $class: 'GitSCM',
+            userRemoteConfigs: [[url: 'YOUR_GIT_REPO_URL.git', credentialsId: 'YOUR_GIT_CREDENTIALS_ID' ]], 
+            branches: [[name: 'refs/tags/${TAG}']]],
+             poll: false
+      }
+
     }
 
     stage('Unit Test') {
