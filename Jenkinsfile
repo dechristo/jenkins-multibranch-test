@@ -1,13 +1,16 @@
 pipeline {
   agent any
-  options { skipDefaultCheckout() } 
- 
+
   parameters {
     gitParameter 
       name: 'TAG', 
       type: 'PT_TAG',
       defaultValue: 'master'
   }
+
+  options { 
+    skipDefaultCheckout() 
+  } 
 
   stages {
     stage("Prepare") {
