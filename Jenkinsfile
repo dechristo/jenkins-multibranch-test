@@ -17,6 +17,7 @@ pipeline {
             userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']],
             branches: [[name: "${params.TAG}"]], 
             poll: false
+        ]
       }
     }
 
