@@ -1,6 +1,7 @@
 pipeline {
   agent any
   options { skipDefaultCheckout() } 
+ 
   parameters {
     gitParameter 
       name: 'TAG', 
