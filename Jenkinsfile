@@ -1,10 +1,25 @@
 pipeline {
   agent any
+  options { skipDefaultCheckout() } 
+  parameters {
+    gitParameter 
+      name: 'TAG', 
+      type: 'PT_TAG',
+      defaultValue: 'master'
+  }
+
   stages {
- 
     stage("Prepare") {
        steps {
-          sh 'git fetch --all --tags'
+          checkout scm:[
+            $class: 'GitSCM', 
+            branches: [[name: "${params.TAG}"]], 
+            doGenerateSubmoduleConfigurations: false, 
+            extensions: [], 
+            gitTool: 'Default', 
+            submoduleCfg: [], 
+            userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']]
+          ]
        }
     }
 
